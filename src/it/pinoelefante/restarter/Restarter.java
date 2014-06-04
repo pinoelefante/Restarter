@@ -16,7 +16,7 @@ public class Restarter {
 					writeStart(numero_avvii);
 					System.out.println("Start: "+numero_avvii);
 					try {
-						Process p=Runtime.getRuntime().exec(proc);
+						Process p=Runtime.getRuntime().exec(cmdJar(proc));
 						p.waitFor();
 						numero_avvii++;
 					} 
@@ -49,6 +49,16 @@ public class Restarter {
 		}
 		catch (IOException e) {
 			e.printStackTrace();
+		}
+	}
+	private static String[] cmdJar(String p){
+		if(p.toLowerCase().endsWith(".jar")){
+			String[] cmd={"java","-jar",p};
+			return cmd;
+		}
+		else {
+			String[] cmd={p};
+			return cmd;
 		}
 	}
 }
